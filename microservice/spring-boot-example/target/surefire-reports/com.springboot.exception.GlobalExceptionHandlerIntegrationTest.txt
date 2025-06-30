@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: com.springboot.exception.GlobalExceptionHandlerIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.253 s <<< FAILURE! -- in com.springboot.exception.GlobalExceptionHandlerIntegrationTest
+com.springboot.exception.GlobalExceptionHandlerIntegrationTest.testValidationErrorWithNumbersInLanguage -- Time elapsed: 0.082 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: 400 BAD_REQUEST
+ but was: 401 UNAUTHORIZED
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.springboot.exception.GlobalExceptionHandlerIntegrationTest.testValidationErrorWithNumbersInLanguage(GlobalExceptionHandlerIntegrationTest.java:49)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+com.springboot.exception.GlobalExceptionHandlerIntegrationTest.testValidationErrorHandling -- Time elapsed: 0.085 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: 400 BAD_REQUEST
+ but was: 401 UNAUTHORIZED
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.springboot.exception.GlobalExceptionHandlerIntegrationTest.testValidationErrorHandling(GlobalExceptionHandlerIntegrationTest.java:36)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+com.springboot.exception.GlobalExceptionHandlerIntegrationTest.testValidationErrorWithLongLanguageCode -- Time elapsed: 0.079 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: 400 BAD_REQUEST
+ but was: 401 UNAUTHORIZED
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.springboot.exception.GlobalExceptionHandlerIntegrationTest.testValidationErrorWithLongLanguageCode(GlobalExceptionHandlerIntegrationTest.java:61)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

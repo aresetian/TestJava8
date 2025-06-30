@@ -1,0 +1,12 @@
+spring:
+  security:
+    user:
+      name: greeting-user
+      password: dev-password-123
+      roles: USER
+
+logging:
+  level:
+    com.springboot: INFO
+    org.springframework: WARN
+    org.springframework.security: DEBUG

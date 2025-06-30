@@ -1,0 +1,159 @@
+# Spring Boot Configuration
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  security:
+    user:
+      name: ${GREETING_USER:greeting-user}
+      password: ${GREETING_USER_PASSWORD:#{T(java.util.UUID).randomUUID().toString()}}
+      roles: USER
+  application:
+    name: greeting-microservice
+  
+  # Web Configuration  
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+# Management Configuration (Actuator)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,caches
+      base-path: /actuator
+    jmx:
+      exposure:
+        exclude: "*"
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  security:
+    enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+      environment: ${spring.profiles.active}
+
+# Server Configuration
+server:
+  address: localhost
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+  
+# Application Configuration
+app:
+  greeting:
+    default-language: ${DEFAULT_LANGUAGE:en}
+    supported-languages:
+      - es
+      - en  
+      - fr
+      - de
+      - it
+      - pt
+      - ru
+      - ja
+      - zh
+  security:
+    user:
+      username: ${GREETING_USER:greeting-user}
+      password: ${GREETING_USER_PASSWORD:#{T(java.util.UUID).randomUUID().toString()}}
+    admin:
+      username: ${GREETING_ADMIN:greeting-admin}
+      password: ${GREETING_ADMIN_PASSWORD:#{T(java.util.UUID).randomUUID().toString()}}
+    rate-limit:
+      requests-per-second: ${RATE_LIMIT:100}
+    cors:
+      allowed-origins: 
+        - "http://localhost:*"
+        - "https://*.company.com"
+      allowed-methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      max-age: 3600
+
+# Logging Configuration
+logging:
+  level:
+    com.springboot: INFO
+    org.springframework.web: WARN
+    org.springframework.security: WARN
+    org.hibernate: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+---
+# Local Development Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+
+server:
+  address: localhost
+
+logging:
+  level:
+    com.springboot: DEBUG
+    org.springframework.security: DEBUG
+
+app:
+  security:
+    rate-limit:
+      requests-per-second: 1000 # Higher limit for development
+
+---
+# Production Profile  
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  address: 0.0.0.0 # Allow external connections in production
+
+logging:
+  level:
+    com.springboot: WARN
+    org.springframework: ERROR
+    org.hibernate: ERROR
+
+app:
+  security:
+    rate-limit:
+      requests-per-second: 50 # Lower limit for production
+
+---
+# Test Profile
+spring:
+  config:
+    activate:
+      on-profile: test
+
+server:
+  port: 0 # Random port for tests
+
+logging:
+  level:
+    com.springboot: OFF
+    org.springframework: WARN
+    org.hibernate: WARN
+    net.bytebuddy: OFF
+    org.mockito: OFF
